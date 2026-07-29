@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cloud Based Crop Disease Detection System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🌿 Cloud Based Crop Disease Detection System</h1>
+
+<p class="subtitle">
+Deep Learning Based  Crop Disease Prediction System
+</p>
+
+<form action="/predict" method="POST" enctype="multipart/form-data">
+
+<div class="upload-box">
+
+<h3>Upload Crop Leaf Image</h3>
+
+<input
+type="file"
+name="file"
+accept="image/*"
+required
+onchange="loadImage(event)"
+>
+
+<br>
+
+<img id="preview">
+
+<br>
+
+<button type="submit">
+
+🔍 Predict Disease
+
+</button>
+
+</div>
+
+</form>
+
+{% if prediction %}
+
+<div class="result">
+
+<h2 style="text-align:center;color:green;">
+
+Prediction Result
+
+</h2>
+
+<div class="card">
+
+<h3>🌽 Crop</h3>
+
+<p>{{ crop }}</p>
+
+</div>
+
+<div class="card">
+
+<h3>🦠 Disease</h3>
+
+<p>{{ disease }}</p>
+
+</div>
+
+<div class="card">
+
+<h3>📊 Confidence</h3>
+
+<div class="progress">
+
+<div
+class="progress-bar"
+style="width:{{confidence}}%;">
+
+{{confidence}}%
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>💊 Recommended Treatment</h3>
+
+<p>{{ treatment }}</p>
+
+</div>
+
+<div class="card">
+
+<h3>🛡 Prevention</h3>
+
+<p>{{ prevention }}</p>
+
+</div>
+
+</div>
+
+{% endif %}
+
+
+</div>
+
+<script>
+
+function loadImage(event){
+
+var image=document.getElementById('preview');
+
+image.src=URL.createObjectURL(event.target.files[0]);
+
+image.style.display="block";
+
+}
+
+</script>
+
+</body>
+</html>
